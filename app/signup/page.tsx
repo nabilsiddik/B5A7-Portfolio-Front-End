@@ -16,11 +16,12 @@ import z from 'zod'
 import { Input } from '@/components/ui/input';
 import { FcGoogle } from "react-icons/fc";
 import { signIn } from "next-auth/react";
+import { toast } from "sonner";
 
 export const signUpSchema = z.object({
   fullName: z.string().min(3, "Full name must be a string at least 3 characters"),
   email: z.string().email("Invalid email address"),
-  password: z.string().regex(/^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).*$/).min(8, "Password must be at least 8 characters")
+  password: z.string().regex(/^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).*$/, "Password must be at least 8 characters and mixed with at least one uppercase, lowercase and special character.")
 });
 
 const Signup = () => {
@@ -36,15 +37,39 @@ const Signup = () => {
   })
 
   // Signup form submit
-  async function onSubmit(values: z.infer<typeof signUpSchema>) {
-    console.log(values)
+  async function onSubmit(userInfo: z.infer<typeof signUpSchema>) {
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/user`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userInfo)
+      })
+
+      const userRes = await res.json()
+      if (userRes?.data?.id) {
+        toast.success('User created successfully')
+      } else {
+        toast.error('User creation failed')
+      }
+    } catch (error: unknown) {
+      console.log(error)
+      toast.error('User creation failed')
+    }
   }
 
 
   // handle social login
-  const handleSocialLogin = async(provider: 'google') => {
-    const res = await signIn(provider)
-    console.log(res)
+  const handleSocialLogin = async (provider: 'google') => {
+    try {
+      await signIn(provider, {
+        callbackUrl: '/'
+      })
+    } catch (err: unknown) {
+      console.log(err)
+      toast.error('Social Login Failed')
+    }
   }
 
   return (
