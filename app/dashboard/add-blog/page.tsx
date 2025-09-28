@@ -1,9 +1,10 @@
-import React from 'react'
+import CreateBlogForm from "@/components/CreateBlogForm"
 
 const AddBlog = () => {
+
   return (
     <div>
-      blog
+      <CreateBlogForm/>
     </div>
   )
 }
