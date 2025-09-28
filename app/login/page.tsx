@@ -35,23 +35,32 @@ export default function Login() {
             await signIn(provider, {
                 callbackUrl: '/'
             })
-        }catch(err: unknown){
+        } catch (err: unknown) {
             console.log(err)
             toast.error('Social Login Failed')
         }
     }
 
-    const onSubmit = async (values: z.infer<typeof loginSchema>) => {
+    const onSubmit = async (loginUserInfo: z.infer<typeof loginSchema>) => {
         try {
-            const res = await signIn('credentials', {
-                redirect: false,
-                email: values.email,
-                password: values.password
+            const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(loginUserInfo)
             })
 
-            console.log('client res', res)
+            const userRes = await res.json()
+            console.log(userRes, 'hey res')
+            if (userRes?.data?.userInfo?.id) {
+                toast.success('User loged in successfully')
+            } else {
+                toast.error('User login failed')
+            }
         } catch (error: unknown) {
-            console.error(error)
+            console.log(error)
+            toast.error('User login failed')
         }
     }
 
