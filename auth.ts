@@ -6,8 +6,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Credentials({
       credentials: {
-        email: {},
-        password: {},
+        email: { label: "Email", type: "text" },
+        password: { label: "Password", type: "password" },
       },
       authorize: async (credentials) => {
         if (credentials === null) return null
@@ -30,17 +30,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
           const parsedRes = await res.json()
 
-          console.log(parsedRes)
-
-          const accessToken = parsedRes.accessToken
-          const refreshToken = parsedRes.refreshToken
-          const userInfo = parsedRes.userInfo
+          console.log('my parsses', parsedRes)
 
           return {
-            accessToken,
-            refreshToken,
-            role: userInfo?.role,
-            email: userInfo?.email
+            id: parsedRes.data.id,
+            email: parsedRes.data.email
           }
 
         } catch (err: any) {
@@ -48,32 +42,24 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
       },
     }),
-    Google
+    Google,
   ],
-  // callbacks: {
-  //   jwt: async ({ token, account, user }) => {
-  //     if (account && user) {
-  //       return {
-  //         ...token,
-  //         accessToken: user.accessToken,
-  //         refreshToken: user.refreshToken,
-  //         user
-  //       }
-  //     }
+  session: {
+    strategy: "jwt",
+  },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id
+        token.email = user.email
+      }
+      return token
+    },
 
-  //     return token
-  //   },
-  //   session: async({session, token}) => {
-  //     if(token){
-  //       session.accessToken = token.accessToken as string
-  //       session.refreshToken = token.refreshToken as string
-  //       session.user = {
-  //         email: token.user?.email,
-  //         role: token.user?.role
-  //       }
-  //     }
-
-  //     return session
-  //   }
-  // }
+    async session({ session, token }) {
+      session.user.id = token.id as string
+      session.user.email = token.email as string
+      return session
+    },
+  },
 })

@@ -9,8 +9,8 @@ import { z } from "zod";
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { signIn } from "next-auth/react"
 import { toast } from "sonner";
+import { signIn } from "next-auth/react";
 
 export const loginSchema = z.object({
     email: z.string().email("Invalid email address"),
@@ -43,21 +43,12 @@ export default function Login() {
 
     const onSubmit = async (loginUserInfo: z.infer<typeof loginSchema>) => {
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(loginUserInfo)
-            })
 
-            const userRes = await res.json()
-            console.log(userRes, 'hey res')
-            if (userRes?.data?.userInfo?.id) {
-                toast.success('User loged in successfully')
-            } else {
-                toast.error('User login failed')
-            }
+            await signIn('credentials', {
+                redirect: false,
+                email: loginUserInfo.email,
+                password: loginUserInfo.password
+            })
         } catch (error: unknown) {
             console.log(error)
             toast.error('User login failed')

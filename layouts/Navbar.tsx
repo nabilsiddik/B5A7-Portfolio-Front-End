@@ -23,6 +23,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
+import LogoutButton from "@/components/LogoutButton";
 
 interface MenuItem {
   title: string;
@@ -78,6 +80,8 @@ const Navbar = ({
     signup: { title: "Sign up", url: "/signup" },
   },
 }: Navbar1Props) => {
+
+
   return (
     <section className="py-4">
       <div className="container mx-auto px-5">
@@ -100,12 +104,20 @@ const Navbar = ({
             </div>
           </div>
           <div className="flex gap-2">
-            <Button asChild variant="outline" size="sm">
-              <a href={auth.login.url}>{auth.login.title}</a>
-            </Button>
-            <Button asChild size="sm">
-              <a href={auth.signup.url}>{auth.signup.title}</a>
-            </Button>
+            <Link href={auth.login.url}>
+              <Button className="cursor-pointer" variant="outline" size="sm">
+                {auth.login.title}
+              </Button>
+            </Link>
+
+            <Link href={auth.signup.url}>
+              <Button className="cursor-pointer" size="sm">
+                {auth.signup.title}
+              </Button>
+            </Link>
+
+
+            <LogoutButton/>
           </div>
         </nav>
 

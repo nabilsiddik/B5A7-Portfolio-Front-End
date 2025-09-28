@@ -21,7 +21,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             />
           </div>
         </header>
-        {children}
+        <div className="px-5">
+          {children}
+        </div>
       </SidebarInset>
     </SidebarProvider>
   );
