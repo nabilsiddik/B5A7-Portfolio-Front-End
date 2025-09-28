@@ -83,7 +83,7 @@ const Navbar = ({
 
 
   return (
-    <section className="py-4">
+    <header className="py-4 border-b">
       <div className="container mx-auto px-5">
         {/* Desktop Menu */}
         <nav className="hidden justify-between md:flex">
@@ -176,7 +176,7 @@ const Navbar = ({
           </div>
         </div>
       </div>
-    </section>
+    </header>
   );
 };
 

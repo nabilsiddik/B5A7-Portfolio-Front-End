@@ -149,7 +149,7 @@ export default function CreateBlogForm() {
                             control={form.control}
                             name="isFeatured"
                             render={({ field }) => (
-                                <FormItem className="flex items-start gap-3">
+                                <FormItem className="flex items-center gap-3">
                                     <FormControl>
                                         <Checkbox
                                             checked={field.value}
