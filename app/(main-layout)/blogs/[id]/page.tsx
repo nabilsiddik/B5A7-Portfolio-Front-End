@@ -24,10 +24,12 @@ const BlogDetails = async ({ params }: { params: { id: string } }) => {
             <div className='flex gap-5 flex-col lg:flex-row'>
                 <div className='flex-3'>
                     <h1 className='text-4xl font-bold mb-5'>{blog?.data?.title}</h1>
-                    <div className='flex gap-3 mb-5 items-center'>
-                        <Badge className='py-2 px-3'>Published: {new Date(blog?.data?.createdAt).toLocaleDateString()}</Badge>
+                    <div className='flex gap-3 mb-5 items-center flex-col md:flex-row'>
+                        <div className='flex flex-row gap-3 '>
+                            <Badge className='py-2 px-3'>Published: {new Date(blog?.data?.createdAt).toLocaleDateString()}</Badge>
 
-                        <Badge className='py-2 px-3'>Updated: {new Date(blog?.data?.updatedAt).toLocaleDateString()}</Badge>
+                            <Badge className='py-2 px-3'>Updated: {new Date(blog?.data?.updatedAt).toLocaleDateString()}</Badge>
+                        </div>
 
                         <h3>Tags: {blog?.data?.tags?.length > 0 && blog?.data?.tags?.map((tag: string, index: number) => <Badge key={index} variant={'outline'} className='py-2 px-3 mr-2'>{tag}</Badge>)}</h3>
 
@@ -36,7 +38,7 @@ const BlogDetails = async ({ params }: { params: { id: string } }) => {
                     <p>{blog?.data?.content}</p>
                 </div>
                 <div className='shadow-md bg-gray-100 flex-1 p-5 md:p-3 lg:p-5'>
-jdsklfjjsdkflsdfjjdklflsdkfsjdlfkjssd sdf sdfsd fsdfsdf sdfsdf sdf sdfsdfsdf sdfdsfs f jdsklfjjsdkflsdfjjdklflsdkfsjdlfkjssd sdf sdfsd fsdfsdf sdfsdf sdf sdfsdfsdf sdfdsfs f jdsklfjjsdkflsdfjjdklflsdkfsjdlfkjssd sdf sdfsd fsdfsdf sdfsdf sdf sdfsdfsdf sdfdsfs f jdsklfjjsdkflsdfjjdklflsdkfsjdlfkjssd sdf sdfsd fsdfsdf sdfsdf sdf sdfsdfsdf sdfdsfs f
+                    jdsklfjjsdkflsdfjjdklflsdkfsjdlfkjssd sdf sdfsd fsdfsdf sdfsdf sdf sdfsdfsdf sdfdsfs f jdsklfjjsdkflsdfjjdklflsdkfsjdlfkjssd sdf sdfsd fsdfsdf sdfsdf sdf sdfsdfsdf sdfdsfs f jdsklfjjsdkflsdfjjdklflsdkfsjdlfkjssd sdf sdfsd fsdfsdf sdfsdf sdf sdfsdfsdf sdfdsfs f jdsklfjjsdkflsdfjjdklflsdkfsjdlfkjssd sdf sdfsd fsdfsdf sdfsdf sdf sdfsdfsdf sdfdsfs f
                 </div>
             </div>
         </div>
