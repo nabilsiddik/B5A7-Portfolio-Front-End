@@ -4,7 +4,7 @@ import Image from "next/image"
 
 const AboutSection = () => {
   return (
-    <section className="container mx-auto px-5 max-w-6xl">
+    <section className="container mx-auto px-5 max-w-6xl py-20">
       <SectionHeader title='About Me' subtitle="Passionate software developer crafting scalable, user-friendly solutions. I turn complex challenges into clean, efficient code while constantly learning and innovating."/>
 
       <div className="flex items-center gap-10 flex-col md:flex-row">
