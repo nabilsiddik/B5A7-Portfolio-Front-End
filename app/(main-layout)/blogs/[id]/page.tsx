@@ -1,16 +1,25 @@
 import { Badge } from '@/components/ui/badge'
+import { IBlog } from '@/interfaces/blog.interfaces';
+import { getAllBlog } from '@/utils/getAllBlog';
 import { FaEye } from "react-icons/fa";
+
+export const generateStaticParams = async() => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/blog`)
+
+    const {data: blogs} = await res.json()
+
+    return blogs?.map((blog: IBlog) => ({
+        id: String(blog.id)
+    }))
+}
 
 const BlogDetails = async ({ params }: { params: { id: string } }) => {
     const { id } = await params
 
-    console.log(id)
-
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/blog/${Number(id)}`)
-
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/blog/${Number(id)}`, {
+        next: {revalidate: 10}
+    })
     const blog = await res.json()
-
-    console.log(blog?.data, 'my blog')
 
     return (
         <div className='container mx-auto px-5'>

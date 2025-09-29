@@ -1,4 +1,4 @@
-import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
+import { Menu } from "lucide-react";
 
 import {
   Accordion,
@@ -23,7 +23,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Link from "next/link";
-import { signOut } from "next-auth/react";
 import LogoutButton from "@/components/LogoutButton";
 
 interface MenuItem {
@@ -62,7 +61,7 @@ const ProfileIcon = () => (
   </svg>
 )
 
-const Navbar = ({
+const Navbar = async({
   logo = {
     url: "/",
     src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg",
@@ -80,6 +79,7 @@ const Navbar = ({
     signup: { title: "Sign up", url: "/signup" },
   },
 }: Navbar1Props) => {
+
 
 
   return (

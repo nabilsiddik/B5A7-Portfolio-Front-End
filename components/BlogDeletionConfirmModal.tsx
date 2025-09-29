@@ -29,7 +29,7 @@ const BlogDeletionConfirmModal = ({children, blogId}: {children: React.ReactNode
                 toast.error('Blog Deletion failed.')
             }
 
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error('something went wrong while deleting blog.', err);
         }
     }

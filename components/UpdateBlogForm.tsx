@@ -36,7 +36,6 @@ const blogSchema = z.object({
 type BlogFormValues = z.infer<typeof blogSchema>;
 
 export default function UpdateBlogForm({ blog, setOpen }: { blog: Partial<IBlog>, setOpen: React.Dispatch<React.SetStateAction<boolean>>}) {
-    const [submitting, setSubmitting] = useState(false);
     const [imagePreview, setImagePreview] = useState<string | null>(null);
 
     const form = useForm<BlogFormValues>({
@@ -53,7 +52,6 @@ export default function UpdateBlogForm({ blog, setOpen }: { blog: Partial<IBlog>
     // Create blog
     const handleUpdateBlog = async (values: BlogFormValues) => {
         console.log(values)
-        setSubmitting(true);
         try {
             const parsed = blogSchema.parse(values);
 
@@ -80,10 +78,8 @@ export default function UpdateBlogForm({ blog, setOpen }: { blog: Partial<IBlog>
             }
 
             console.log(parsedRes, 'jey res')
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error('something went wrong while creating blog.', err);
-        } finally {
-            setSubmitting(false);
         }
     };
 

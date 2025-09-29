@@ -11,6 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { toast } from "sonner";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export const loginSchema = z.object({
     email: z.string().email("Invalid email address"),
@@ -20,6 +21,7 @@ export const loginSchema = z.object({
 
 export default function Login() {
     const id = useId()
+    const router = useRouter()
 
     const form = useForm<z.infer<typeof loginSchema>>({
         resolver: zodResolver(loginSchema),
@@ -43,12 +45,17 @@ export default function Login() {
 
     const onSubmit = async (loginUserInfo: z.infer<typeof loginSchema>) => {
         try {
-
-            await signIn('credentials', {
+            const res = await signIn('credentials', {
                 redirect: false,
                 email: loginUserInfo.email,
                 password: loginUserInfo.password
             })
+
+            if(res.ok){
+                router.push('/dashboard')
+            }else{
+                console.log('login failed', res?.error)
+            }
         } catch (error: unknown) {
             console.log(error)
             toast.error('User login failed')

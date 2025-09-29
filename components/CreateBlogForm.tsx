@@ -18,6 +18,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { toast } from "sonner";
+import Image from "next/image";
 
 // Blog zod schema
 const blogSchema = z.object({
@@ -72,14 +73,14 @@ export default function CreateBlogForm() {
 
             if (parsedRes?.data?.id) {
                 toast.success('Blog created successfully.')
-                // form.reset();
+                form.reset();
                 setImagePreview(null);
             }else{
                 toast.error('Blog creation failed.')
             }
 
             console.log(parsedRes, 'jey res')
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error('something went wrong while creating blog.', err);
         } finally {
             setSubmitting(false);
@@ -181,7 +182,7 @@ export default function CreateBlogForm() {
 
                     {imagePreview ? (
                         <div className="rounded overflow-hidden border">
-                            <img src={imagePreview} alt="preview" className="w-full h-48 object-cover" />
+                            <Image src={imagePreview} width={400} height={250} alt="blog preview image"/>
                         </div>
                     ) : null}
 
