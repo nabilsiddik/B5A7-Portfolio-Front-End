@@ -3,7 +3,13 @@ export const getAllBlog = async () => {
         const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/blog`, {
             next: { revalidate: 60 },
         })
-        const blogs = res.json()
+
+        if (!res.ok) {
+            console.error("Failed to fetch blogs:", res.status, await res.text())
+            return []
+        }
+
+        const blogs = await res.json()
         return blogs
     } catch (err: unknown) {
         console.log(err)

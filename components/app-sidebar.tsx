@@ -25,8 +25,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
  const {data: session, status} = useSession()
 
- console.log('hi ses', session)
-
   // This is sample data.
   const data = {
     user: {

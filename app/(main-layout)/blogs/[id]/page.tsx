@@ -1,6 +1,5 @@
 import { Badge } from '@/components/ui/badge'
 import { IBlog } from '@/interfaces/blog.interfaces';
-import { getAllBlog } from '@/utils/getAllBlog';
 import { FaEye } from "react-icons/fa";
 
 export const generateStaticParams = async() => {
