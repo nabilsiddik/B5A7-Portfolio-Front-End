@@ -1,4 +1,3 @@
-'use client'
 import {
     Table,
     TableBody,
@@ -12,23 +11,15 @@ import { getAllBlog } from "@/utils/getAllBlog"
 import { shortText } from "@/utils/shortText"
 import Image from "next/image"
 import Link from "next/link"
-import { FaEdit } from "react-icons/fa";
-import { FaEye } from "react-icons/fa";
-import { RiDeleteBin6Fill } from "react-icons/ri";
+import { FaEdit, FaEye } from "react-icons/fa";
+import BlogDeletionConfirmModal from "./BlogDeletionConfirmModal"
+import { RiDeleteBin6Fill } from "react-icons/ri"
+import UpdateBlogModal from "./UpdateBlogModal"
 
 const BlogDataTable = async () => {
     const res = await getAllBlog()
     const blogs = res.data
 
-    // Edit blog
-    const handleEditBlog = () => {
-
-    }
-
-    // Delete blog 
-    const handleDeleteBlog = () => [
-
-    ]
     return (
         <div>
             <Table>
@@ -66,9 +57,18 @@ const BlogDataTable = async () => {
                             </TableCell>
                             <TableCell>
                                 <div className="flex items-center gap-3 text-xl">
-                                    <span className="cursor-pointer" onClick={handleEditBlog}><FaEdit /></span>
-                                    <span className="cursor-pointer"><FaEye /></span>
-                                    <span className="cursor-pointer" onClick={handleDeleteBlog}><RiDeleteBin6Fill /></span>
+
+                                    <Link href={`/blogs/${blog?.id}`}>
+                                        <span className="cursor-pointer"><FaEye /></span>
+                                    </Link>
+                                    <UpdateBlogModal blog={blog}>
+                                        <span className="cursor-pointer"><FaEdit /></span>
+                                    </UpdateBlogModal>
+
+                                    <BlogDeletionConfirmModal blogId={Number(blog.id)}>
+                                        <span className="cursor-pointer"><RiDeleteBin6Fill /></span>
+                                    </BlogDeletionConfirmModal>
+
                                 </div>
                             </TableCell>
                         </TableRow>
