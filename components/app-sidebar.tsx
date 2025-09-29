@@ -9,7 +9,6 @@ import {
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
-import { NavProjects } from "@/components/nav-projects"
 import { NavUser } from "@/components/nav-user"
 import { TeamSwitcher } from "@/components/team-switcher"
 import {
@@ -19,56 +18,45 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import { useSession } from "next-auth/react"
 
-// This is sample data.
-const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
-  teams: [
-    {
-      name: "Acme Inc",
-      logo: GalleryVerticalEnd,
-      plan: "Enterprise",
-    },
-    {
-      name: "Portfolio",
-      logo: AudioWaveform,
-      plan: "Startup",
-    },
-    {
-      name: "Website",
-      logo: Command,
-      plan: "Free",
-    },
-  ],
-  navMain: [
-    {
-      title: "Blogs",
-      url: "#",
-      icon: SquareTerminal,
-      isActive: true,
-      items: [
-        {
-          title: "Add Blog",
-          url: "/dashboard/add-blog",
-        },
-        {
-          title: "All Blogs",
-          url: "/dashboard/all-blogs",
-        }
-      ],
-    }
-  ],
-}
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+
+ const {data: session, status} = useSession()
+
+ console.log('hi ses', session)
+
+  // This is sample data.
+  const data = {
+    user: {
+      name: session?.user?.name as string,
+      email: session?.user?.email as string,
+      avatar: "/images/user.png",
+    },
+    navMain: [
+      {
+        title: "Blogs",
+        url: "#",
+        icon: SquareTerminal,
+        isActive: true,
+        items: [
+          {
+            title: "Add Blog",
+            url: "/dashboard/add-blog",
+          },
+          {
+            title: "All Blogs",
+            url: "/dashboard/all-blogs",
+          }
+        ],
+      }
+    ],
+  }
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+        <TeamSwitcher />
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
