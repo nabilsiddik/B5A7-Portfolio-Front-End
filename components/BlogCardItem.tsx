@@ -12,17 +12,22 @@ import Image from "next/image"
 import { Button } from "./ui/button"
 import { shortText } from "@/utils/shortText"
 import { FaEye } from "react-icons/fa";
+import Link from "next/link"
 
 const BlogCardItem = ({ blog }: { blog: IBlog }) => {
     return (
         <Card>
             <CardHeader>
                 <div className="w-full">
-                    <Image src={blog?.featuredImage} width={450} height={250} alt={blog?.title} className="rounded-lg" />
+                    <Link href={`/blogs/${blog?.id}`}>
+                        <Image src={blog?.featuredImage} width={450} height={250} alt={blog?.title} className="rounded-lg" />
+                    </Link>
                 </div>
             </CardHeader>
             <CardContent>
-                <CardTitle className="text-xl font-bold mb-2">{shortText(blog?.title, 90)}</CardTitle>
+                <Link href={`/blogs/${blog?.id}`}>
+                    <CardTitle className="text-xl font-bold mb-2">{shortText(blog?.title, 90)}</CardTitle>
+                </Link>
                 <CardDescription>{shortText(blog?.content, 200)}</CardDescription>
             </CardContent>
             <CardFooter>
@@ -31,7 +36,9 @@ const BlogCardItem = ({ blog }: { blog: IBlog }) => {
                         <FaEye />
                         {blog?.view}
                     </div>
-                    <Button className="">Read More</Button>
+                    <Link href={`/blogs/${blog?.id}`}>
+                        <Button className="cursor-pointer">Read More</Button>
+                    </Link>
                 </div>
             </CardFooter>
         </Card>
