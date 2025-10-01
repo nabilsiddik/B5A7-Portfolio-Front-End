@@ -26,6 +26,7 @@ export const createProjectSchema = z.object({
   description: z.string().min(10, "description is required"),
   thumbnail: z.url("Thumbnail url is required."),
   features: z.string().optional(),
+  liveSiteUrl: z.url("Live Site url is required."),
   githubClient: z.url("Github client url is required."),
   githubServer: z.url("Github server url is required."),
 });
@@ -36,7 +37,6 @@ export default function CreateProjectForm() {
   const { data: session } = useSession();
 
   const [submitting, setSubmitting] = useState(false);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const form = useForm<ProjectFormValues>({
     resolver: zodResolver(createProjectSchema),
@@ -45,6 +45,7 @@ export default function CreateProjectForm() {
       description: "",
       thumbnail: "",
       features: "",
+      liveSiteUrl: "",
       githubClient: "",
       githubServer: "",
     },
@@ -57,13 +58,12 @@ export default function CreateProjectForm() {
     try {
       const parsed = createProjectSchema.parse(values);
 
-      //   const featuresArray = parsed?.features?.split("\n");
-
       const payload = {
         title: parsed.title,
         description: parsed.description,
         thumbnail: parsed.thumbnail || null,
-        features: parsed?.features?.split("\n"),
+        features: parsed?.features?.split("\n") || [],
+        liveSite: parsed.liveSiteUrl,
         githubClient: parsed.githubClient,
         githubServer: parsed.githubServer,
         userId: Number(session?.user?.id),
@@ -79,7 +79,6 @@ export default function CreateProjectForm() {
       if (parsedRes?.data?.id) {
         toast.success("Project created successfully.");
         form.reset();
-        setImagePreview(null);
       } else {
         toast.error("Project creation failed.");
       }
@@ -125,15 +124,23 @@ export default function CreateProjectForm() {
                 <FormLabel>Thumbnail (URL)</FormLabel>
                 <FormControl>
                   <div className="flex gap-2 items-center">
-                    <Input
-                      {...field}
-                      placeholder="Project thumbnail URL"
-                      onChange={(e) => {
-                        field.onChange(e);
-                        const value = e.target.value;
-                        setImagePreview(value ? value : null);
-                      }}
-                    />
+                    <Input {...field} placeholder="Project thumbnail URL" />
+                  </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="liveSiteUrl"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Live Site (URL)</FormLabel>
+                <FormControl>
+                  <div className="flex gap-2 items-center">
+                    <Input {...field} placeholder="Live Site URL" />
                   </div>
                 </FormControl>
                 <FormMessage />
@@ -179,17 +186,6 @@ export default function CreateProjectForm() {
             />
           </div>
 
-          {imagePreview ? (
-            <div className="rounded overflow-hidden border">
-              <Image
-                src={imagePreview}
-                width={400}
-                height={250}
-                alt="blog preview image"
-              />
-            </div>
-          ) : null}
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FormField
               control={form.control}
@@ -229,7 +225,6 @@ export default function CreateProjectForm() {
               variant="outline"
               onClick={() => {
                 form.reset();
-                setImagePreview(null);
               }}
               type="button"
             >

@@ -55,11 +55,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         items: [
           {
             title: "Add Project",
-            url: "/dashboard/add-projects",
+            url: "/dashboard/add-project",
           },
           {
             title: "All Projects",
-            url: "/dashboard/all-project",
+            url: "/dashboard/all-projects",
           },
         ],
       },

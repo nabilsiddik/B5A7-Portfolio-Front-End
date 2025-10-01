@@ -42,7 +42,7 @@ const ProjectDataTable = async () => {
               return (
                 <TableRow key={index}>
                   <TableCell>
-                    <div className="flex gap-3 items-center">
+                    <div className="">
                       <Image
                         src={project?.thumbnail as string}
                         width={90}
@@ -53,22 +53,27 @@ const ProjectDataTable = async () => {
                         <h3 className="font-bold text-lg">
                           {shortText(project?.title as string, 50)}
                         </h3>
-                        <span>Nabil Siddik</span>
+                        <span>{project?.user?.fullName}</span>
                       </div>
                     </div>
                   </TableCell>
                   <TableCell>
-                    {/* <Link href={project?.liveSite as string}>
-                      <Button>Live Site</Button>
-                    </Link> */}
-                    live
+                    <Link href={project?.liveSite as string} target="_blank">
+                      <Button className="cursor-pointer">Live Site</Button>
+                    </Link>
                   </TableCell>
                   <TableCell className="flex flex-col gap-3">
-                    <Link href={project?.githubClient as string}>
-                      <Button>Github Client</Button>
+                    <Link
+                      href={project?.githubClient as string}
+                      target="_blank"
+                    >
+                      <Button className="cursor-pointer">Github Client</Button>
                     </Link>
-                    <Link href={project?.githubClient as string}>
-                      <Button>Github Server</Button>
+                    <Link
+                      href={project?.githubClient as string}
+                      target="_blank"
+                    >
+                      <Button className="cursor-pointer">Github Server</Button>
                     </Link>
                   </TableCell>
                   <TableCell>
