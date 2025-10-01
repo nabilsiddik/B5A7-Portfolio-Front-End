@@ -55,7 +55,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         items: [
           {
             title: "Add Project",
-            url: "/dashboard/add-project",
+            url: "/dashboard/add-projects",
           },
           {
             title: "All Projects",

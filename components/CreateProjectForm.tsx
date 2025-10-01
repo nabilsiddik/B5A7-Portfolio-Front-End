@@ -34,7 +34,6 @@ type ProjectFormValues = z.infer<typeof createProjectSchema>;
 
 export default function CreateProjectForm() {
   const { data: session } = useSession();
-  console.log(session?.user, "hey user sss");
 
   const [submitting, setSubmitting] = useState(false);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -64,10 +63,10 @@ export default function CreateProjectForm() {
         title: parsed.title,
         description: parsed.description,
         thumbnail: parsed.thumbnail || null,
-        features: ["hi", "hello"],
+        features: parsed?.features?.split("\n"),
         githubClient: parsed.githubClient,
         githubServer: parsed.githubServer,
-        userId: 2,
+        userId: Number(session?.user?.id),
       };
 
       const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/project`, {
