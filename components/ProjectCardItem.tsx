@@ -22,7 +22,7 @@ const ProjectCardItem = ({ project }: { project: IProject }) => {
           <Link href={`/projects/${project?.id}`}>
             <Image
               src={project?.thumbnail}
-              width={450}
+              width={650}
               height={250}
               alt={project?.title}
               className="rounded-lg"
@@ -41,7 +41,7 @@ const ProjectCardItem = ({ project }: { project: IProject }) => {
         </CardDescription>
       </CardContent>
       <CardFooter>
-        <div className="flex flex-row items-center justify-between w-full">
+        <div className="flex flex-row items-center justify-between w-full flex-wrap">
           <Link href={project?.liveSite} target="_blank">
             <Button className="cursor-pointer" size={"sm"} variant={"link"}>
               Live Site

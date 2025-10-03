@@ -17,11 +17,11 @@ const BlogCardItem = ({ blog }: { blog: IBlog }) => {
   return (
     <Card>
       <CardHeader>
-        <div className="max-h-[200px] overflow-hidden">
+        <div className="max-h-[230px] overflow-hidden">
           <Link href={`/blogs/${blog?.id}`}>
             <Image
               src={blog?.featuredImage}
-              width={350}
+              width={650}
               height={250}
               alt={blog?.title}
               className="rounded-lg"

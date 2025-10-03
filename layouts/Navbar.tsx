@@ -73,25 +73,21 @@ const ProfileIcon = () => (
   </svg>
 );
 
-const Navbar = ({
-  logo = {
+const Navbar = () => {
+  const { data: session } = useSession();
+
+  const logo = {
     url: "/",
     src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg",
     alt: "logo",
     title: "Portfolio",
-  },
-  menu = [
+  };
+  const menu = [
     { title: "Home", url: "/" },
     { title: "About", url: "/about" },
     { title: "Projects", url: "/projects" },
     { title: "Blog", url: "/blogs" },
-  ],
-  auth = {
-    login: { title: "Login", url: "/login" },
-    signup: { title: "Sign up", url: "/signup" },
-  },
-}: Navbar1Props) => {
-  const { data: session } = useSession();
+  ];
 
   return (
     <header className="py-4 border-b">
@@ -109,7 +105,20 @@ const Navbar = ({
             <div className="flex items-center">
               <NavigationMenu>
                 <NavigationMenuList>
-                  {menu.map((item) => renderMenuItem(item))}
+                  <ul className="flex flex-row gap-3">
+                    {menu.map((item) => {
+                      return (
+                        <li>
+                          <Link href={item?.url}>{item?.title}</Link>
+                        </li>
+                      );
+                    })}
+                    {session?.user?.id && (
+                      <li>
+                        <Link href="/dashboard">Dashboard</Link>
+                      </li>
+                    )}
+                  </ul>
                 </NavigationMenuList>
               </NavigationMenu>
             </div>
@@ -118,9 +127,9 @@ const Navbar = ({
             {session?.user?.email ? (
               <LogoutButton />
             ) : (
-              <Link href={auth.login.url}>
+              <Link href={"/login"}>
                 <Button className="cursor-pointer" size="sm">
-                  {auth.login.title}
+                  Login
                 </Button>
               </Link>
             )}
@@ -150,16 +159,34 @@ const Navbar = ({
                     collapsible
                     className="flex w-full flex-col gap-4"
                   >
-                    {menu.map((item) => renderMobileMenuItem(item))}
+                    <ul className="flex flex-col gap-3">
+                      {menu.map((item, index) => {
+                        return (
+                          <li>
+                            <Link key={index} href={item?.url}>
+                              {item?.title}
+                            </Link>
+                          </li>
+                        );
+                      })}
+                      {session?.user?.id && (
+                        <li>
+                          <Link href="/dashboard">Dashboard</Link>
+                        </li>
+                      )}
+                    </ul>
                   </Accordion>
 
-                  <div className="flex flex-col gap-3">
-                    <Button asChild variant="outline">
-                      <Link href={auth.login.url}>{auth.login.title}</Link>
-                    </Button>
-                    <Button asChild>
-                      <Link href={auth.signup.url}>{auth.signup.title}</Link>
-                    </Button>
+                  <div className="flex gap-2">
+                    {session?.user?.email ? (
+                      <LogoutButton />
+                    ) : (
+                      <Link href={"/login"}>
+                        <Button className="cursor-pointer" size="sm">
+                          Login
+                        </Button>
+                      </Link>
+                    )}
                   </div>
                 </div>
               </SheetContent>
