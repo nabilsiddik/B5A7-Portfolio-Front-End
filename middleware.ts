@@ -11,9 +11,6 @@ export async function middleware(request: NextRequest) {
   if (session.user.email && session.user.email !== process.env.ADMIN_EMAIL) {
     return NextResponse.redirect(new URL("/unauthorize", request.url));
   }
-  if (request.nextUrl.pathname === "/dashboard") {
-    return NextResponse.redirect(new URL("/dashboard/add-blog", request.url));
-  }
 }
 
 export const config = {
