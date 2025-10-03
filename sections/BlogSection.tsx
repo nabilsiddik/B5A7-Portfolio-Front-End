@@ -11,8 +11,6 @@ const BlogSection = async () => {
   });
   const blogs = await res.json();
 
-  console.log("amar blogs", blogs);
-
   return (
     <section className="container mx-auto px-5 py-20">
       <SectionHeader

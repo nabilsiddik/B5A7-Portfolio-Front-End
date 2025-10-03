@@ -57,16 +57,15 @@ export default function Login() {
         password: loginUserInfo.password,
       });
 
-      if (res.ok) {
-        router.push("/dashboard/add-blog");
-        toast.success("Login successfull.");
+      console.log("this my res", res);
+      if (res?.error) {
+        toast.error("Invalid email or password");
       } else {
-        console.log("login failed", res?.error);
-        toast.error("Login Failed.");
+        toast.success("Login successful");
+        router.push("/dashboard");
       }
     } catch (error: unknown) {
       console.log(error);
-      toast.error("User login failed");
     }
   };
 

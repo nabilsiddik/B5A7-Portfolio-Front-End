@@ -51,8 +51,6 @@ export function NavUser({
     getCurrentUser();
   }, [session]);
 
-  console.log(currentUser, "currrr userrrrr");
-
   return (
     <SidebarMenu>
       <SidebarMenuItem>
