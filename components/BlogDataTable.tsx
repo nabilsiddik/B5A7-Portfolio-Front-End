@@ -17,10 +17,8 @@ import { RiDeleteBin6Fill } from "react-icons/ri";
 import UpdateBlogModal from "./UpdateBlogModal";
 
 const BlogDataTable = async () => {
-  const res = await getAllBlog();
-  const blogs = res.data;
-
-  console.log("my res", blogs);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/blog`);
+  const blogs = await res.json();
 
   return (
     <div>
@@ -35,8 +33,8 @@ const BlogDataTable = async () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {blogs.length > 0 &&
-            blogs.map((blog: Partial<IBlog>, index: number) => {
+          {blogs?.data?.length > 0 &&
+            blogs?.data?.map((blog: Partial<IBlog>, index: number) => {
               return (
                 <TableRow key={index}>
                   <TableCell className="">

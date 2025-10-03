@@ -1,11 +1,14 @@
 import ProjectCardItem from "@/components/ProjectCardItem";
 import SectionHeader from "@/components/SectionHeader";
 import { IProject } from "@/interfaces/project.interfaces";
-import { getAllProjects } from "@/utils/getAllProjects";
-import React from "react";
 
 const ProjectSection = async () => {
-  const projects = await getAllProjects();
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/project`, {
+    next: {
+      revalidate: 30,
+    },
+  });
+  const projects = await res.json();
 
   return (
     <section className="container mx-auto px-5 py-20">

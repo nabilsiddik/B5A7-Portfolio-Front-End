@@ -1,4 +1,5 @@
 import AboutSection from "@/sections/AboutSection";
+import BlogSection from "@/sections/BlogSection";
 import ProjectSection from "@/sections/ProjectSection";
 
 const Home = () => {
@@ -6,6 +7,7 @@ const Home = () => {
     <div>
       <AboutSection />
       <ProjectSection />
+      <BlogSection />
     </div>
   );
 };

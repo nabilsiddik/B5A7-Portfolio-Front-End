@@ -19,8 +19,8 @@ import { Button } from "./ui/button";
 import ProjectDeletionConfirmModal from "./ProjdctDeletionConfirmModal";
 
 const ProjectDataTable = async () => {
-  const res = await getAllProjects();
-  const projects = res.data;
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/project`);
+  const projects = await res.json();
 
   return (
     <div>
@@ -35,8 +35,8 @@ const ProjectDataTable = async () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {projects.length > 0 &&
-            projects.map((project: IProject, index: number) => {
+          {projects?.data?.length > 0 &&
+            projects?.data?.map((project: IProject, index: number) => {
               return (
                 <TableRow key={index}>
                   <TableCell>
