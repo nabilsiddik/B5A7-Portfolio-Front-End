@@ -1,11 +1,13 @@
-import AboutSection from "@/sections/AboutSection"
+import AboutSection from "@/sections/AboutSection";
+import ProjectSection from "@/sections/ProjectSection";
 
 const Home = () => {
   return (
     <div>
-      <AboutSection/>
+      <AboutSection />
+      <ProjectSection />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

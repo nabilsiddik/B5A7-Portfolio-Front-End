@@ -1,6 +1,10 @@
 export const getAllProjects = async () => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/project`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/project`, {
+      next: {
+        revalidate: 30,
+      },
+    });
 
     if (!res.ok) {
       console.error("Failed to fetch projects:", res.status, await res.text());

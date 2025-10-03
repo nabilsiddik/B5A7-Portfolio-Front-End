@@ -1,5 +1,5 @@
-'use client'
-import { Button } from "@/components/ui/button"
+"use client";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -7,25 +7,32 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
+} from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link"
+import Link from "next/link";
 import { useId } from "react";
 import { useForm } from "react-hook-form";
-import z from 'zod'
-import { Input } from '@/components/ui/input';
+import z from "zod";
+import { Input } from "@/components/ui/input";
 import { FcGoogle } from "react-icons/fc";
 import { signIn } from "next-auth/react";
 import { toast } from "sonner";
 
 export const signUpSchema = z.object({
-  fullName: z.string().min(3, "Full name must be a string at least 3 characters"),
+  fullName: z
+    .string()
+    .min(3, "Full name must be a string at least 3 characters"),
   email: z.string().email("Invalid email address"),
-  password: z.string().regex(/^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).*$/, "Password must be at least 8 characters and mixed with at least one uppercase, lowercase and special character.")
+  password: z
+    .string()
+    .regex(
+      /^(?=.{8,}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9]).*$/,
+      "Password must be at least 8 characters and mixed with at least one uppercase, lowercase and special character."
+    ),
 });
 
 const Signup = () => {
-  const id = useId()
+  const id = useId();
 
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
@@ -34,43 +41,42 @@ const Signup = () => {
       email: "",
       password: "",
     },
-  })
+  });
 
   // Signup form submit
   async function onSubmit(userInfo: z.infer<typeof signUpSchema>) {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/user`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(userInfo)
-      })
+        body: JSON.stringify(userInfo),
+      });
 
-      const userRes = await res.json()
+      const userRes = await res.json();
       if (userRes?.data?.id) {
-        toast.success('User created successfully')
+        toast.success("User created successfully");
       } else {
-        toast.error('User creation failed')
+        toast.error("User creation failed");
       }
     } catch (error: unknown) {
-      console.log(error)
-      toast.error('User creation failed')
+      console.log(error);
+      toast.error("User creation failed");
     }
   }
-
 
   // handle social login
-  const handleSocialLogin = async (provider: 'google') => {
-    try {
-      await signIn(provider, {
-        callbackUrl: '/'
-      })
-    } catch (err: unknown) {
-      console.log(err)
-      toast.error('Social Login Failed')
-    }
-  }
+  // const handleSocialLogin = async (provider: 'google') => {
+  //   try {
+  //     await signIn(provider, {
+  //       callbackUrl: '/'
+  //     })
+  //   } catch (err: unknown) {
+  //     console.log(err)
+  //     toast.error('Social Login Failed')
+  //   }
+  // }
 
   return (
     <div className="container mx-auto px-5 flex items-center justify-center min-h-screen">
@@ -97,7 +103,11 @@ const Signup = () => {
                     Full Name <span className="text-red-500">*</span>
                   </FormLabel>
                   <FormControl>
-                    <Input {...field} id={`${id}-fullName`} placeholder="Full Name" />
+                    <Input
+                      {...field}
+                      id={`${id}-fullName`}
+                      placeholder="Full Name"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -113,7 +123,12 @@ const Signup = () => {
                     Email <span className="text-red-500">*</span>
                   </FormLabel>
                   <FormControl>
-                    <Input {...field} id={`${id}-email`} type="email" placeholder="example@gmail.com" />
+                    <Input
+                      {...field}
+                      id={`${id}-email`}
+                      type="email"
+                      placeholder="example@gmail.com"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -129,7 +144,12 @@ const Signup = () => {
                     Password <span className="text-red-500">*</span>
                   </FormLabel>
                   <FormControl>
-                    <Input {...field} id={`${id}-password`} type="password" placeholder="Enter your password" />
+                    <Input
+                      {...field}
+                      id={`${id}-password`}
+                      type="password"
+                      placeholder="Enter your password"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -148,14 +168,14 @@ const Signup = () => {
           </form>
         </Form>
 
-        <div className="before:bg-border after:bg-border flex items-center gap-3 before:h-px before:flex-1 after:h-px after:flex-1 my-5">
+        {/* <div className="before:bg-border after:bg-border flex items-center gap-3 before:h-px before:flex-1 after:h-px after:flex-1 my-5">
           <span className="text-muted-foreground text-xs">Or</span>
-        </div>
+        </div> */}
 
-        <Button onClick={() => handleSocialLogin('google')} variant="outline" className="w-full cursor-pointer">
+        {/* <Button onClick={() => handleSocialLogin('google')} variant="outline" className="w-full cursor-pointer">
           <FcGoogle />
           Login with Google
-        </Button>
+        </Button> */}
 
         <p className="mt-3 text-center">
           Already have an account?{" "}
@@ -165,7 +185,7 @@ const Signup = () => {
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;

@@ -7,7 +7,11 @@ export interface IProject {
   githubClient: string;
   githubServer: string;
   features: string[];
-  userId?: number;
+  user?: {
+    id: number;
+    fullName: string;
+    email: string;
+  };
   createdAt?: Date;
   updatedAt?: Date;
 }

@@ -1,135 +1,91 @@
 import SocialIcons from "@/components/SocialIcons";
-import { Link } from "lucide-react";
+import Link from "next/link";
 
 interface MenuItem {
-    title: string;
-    links: {
-        text: string;
-        url: string;
-    }[];
+  title: string;
+  links: {
+    text: string;
+    url: string;
+  }[];
 }
 
 interface Footer2Props {
-    logo?: {
-        url: string;
-        src: string;
-        alt: string;
-        title: string;
-    };
-    tagline?: string;
-    menuItems?: MenuItem[];
-    copyright?: string;
-    bottomLinks?: {
-        text: string;
-        url: string;
-    }[];
+  logo?: {
+    url: string;
+    src: string;
+    alt: string;
+    title: string;
+  };
+  tagline?: string;
+  menuItems?: MenuItem[];
+  copyright?: string;
+  bottomLinks?: {
+    text: string;
+    url: string;
+  }[];
 }
 
 const ProfileIcon = () => (
-  <svg width="30px" height="30px" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M38.87 27.571C38.8647 25.6242 38.0883 23.7587 36.7108 22.3831C35.3333 21.0074 33.4668 20.2336 31.52 20.231C29.5748 20.2357 27.7106 21.0106 26.3351 22.386C24.9596 23.7615 24.1847 25.6257 24.18 27.571C24.1826 29.5178 24.9565 31.3842 26.3322 32.7617C27.7078 34.1393 29.5732 34.9157 31.52 34.921C33.4684 34.9178 35.336 34.1424 36.7137 32.7647C38.0914 31.387 38.8668 29.5193 38.87 27.571Z" fill="#000000" />
-    <path d="M32.39 38.921H30.65C27.3861 38.9239 24.2567 40.2218 21.9487 42.5298C19.6408 44.8377 18.3429 47.9671 18.34 51.231V57.601H44.7V51.231C44.6971 47.9671 43.3992 44.8377 41.0913 42.5298C38.7833 40.2218 35.6539 38.9239 32.39 38.921Z" fill="#000000" />
-    <path d="M51.52 5.60095H11.52C9.92869 5.60095 8.40256 6.23309 7.27734 7.35831C6.15213 8.48353 5.51999 10.0097 5.51999 11.601V51.601C5.51999 53.1922 6.15213 54.7184 7.27734 55.8436C8.40256 56.9688 9.92869 57.601 11.52 57.601H14.34V51.231C14.3425 48.0404 15.2795 44.9205 17.0354 42.2565C18.7912 39.5925 21.2889 37.5013 24.22 36.2409C22.9529 35.1797 21.9344 33.8531 21.2363 32.355C20.5382 30.8569 20.1776 29.2237 20.18 27.571C20.1845 24.5648 21.3807 21.683 23.5064 19.5573C25.6321 17.4316 28.5138 16.2355 31.52 16.231C34.5277 16.2333 37.4118 17.4285 39.5395 19.5544C41.6672 21.6802 42.865 24.5632 42.87 27.571C42.8724 29.2237 42.5118 30.8569 41.8137 32.355C41.1156 33.8531 40.0971 35.1797 38.83 36.2409C41.7587 37.5034 44.2539 39.5955 46.0078 42.2592C47.7617 44.9229 48.6976 48.0417 48.7 51.231V57.601H51.52C53.1113 57.601 54.6374 56.9688 55.7626 55.8436C56.8879 54.7184 57.52 53.1922 57.52 51.601V11.601C57.52 10.0097 56.8879 8.48353 55.7626 7.35831C54.6374 6.23309 53.1113 5.60095 51.52 5.60095Z" fill="#999999" />
+  <svg
+    width="30px"
+    height="30px"
+    viewBox="0 0 64 64"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M38.87 27.571C38.8647 25.6242 38.0883 23.7587 36.7108 22.3831C35.3333 21.0074 33.4668 20.2336 31.52 20.231C29.5748 20.2357 27.7106 21.0106 26.3351 22.386C24.9596 23.7615 24.1847 25.6257 24.18 27.571C24.1826 29.5178 24.9565 31.3842 26.3322 32.7617C27.7078 34.1393 29.5732 34.9157 31.52 34.921C33.4684 34.9178 35.336 34.1424 36.7137 32.7647C38.0914 31.387 38.8668 29.5193 38.87 27.571Z"
+      fill="#000000"
+    />
+    <path
+      d="M32.39 38.921H30.65C27.3861 38.9239 24.2567 40.2218 21.9487 42.5298C19.6408 44.8377 18.3429 47.9671 18.34 51.231V57.601H44.7V51.231C44.6971 47.9671 43.3992 44.8377 41.0913 42.5298C38.7833 40.2218 35.6539 38.9239 32.39 38.921Z"
+      fill="#000000"
+    />
+    <path
+      d="M51.52 5.60095H11.52C9.92869 5.60095 8.40256 6.23309 7.27734 7.35831C6.15213 8.48353 5.51999 10.0097 5.51999 11.601V51.601C5.51999 53.1922 6.15213 54.7184 7.27734 55.8436C8.40256 56.9688 9.92869 57.601 11.52 57.601H14.34V51.231C14.3425 48.0404 15.2795 44.9205 17.0354 42.2565C18.7912 39.5925 21.2889 37.5013 24.22 36.2409C22.9529 35.1797 21.9344 33.8531 21.2363 32.355C20.5382 30.8569 20.1776 29.2237 20.18 27.571C20.1845 24.5648 21.3807 21.683 23.5064 19.5573C25.6321 17.4316 28.5138 16.2355 31.52 16.231C34.5277 16.2333 37.4118 17.4285 39.5395 19.5544C41.6672 21.6802 42.865 24.5632 42.87 27.571C42.8724 29.2237 42.5118 30.8569 41.8137 32.355C41.1156 33.8531 40.0971 35.1797 38.83 36.2409C41.7587 37.5034 44.2539 39.5955 46.0078 42.2592C47.7617 44.9229 48.6976 48.0417 48.7 51.231V57.601H51.52C53.1113 57.601 54.6374 56.9688 55.7626 55.8436C56.8879 54.7184 57.52 53.1922 57.52 51.601V11.601C57.52 10.0097 56.8879 8.48353 55.7626 7.35831C54.6374 6.23309 53.1113 5.60095 51.52 5.60095Z"
+      fill="#999999"
+    />
   </svg>
-)
+);
 
-const Footer = ({
-    logo = {
-        src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/block-1.svg",
-        alt: "blocks for shadcn/ui",
-        title: "Shadcnblocks.com",
-        url: "https://www.shadcnblocks.com",
-    },
-    menuItems = [
-        {
-            title: "Product",
-            links: [
-                { text: "Overview", url: "#" },
-                { text: "Pricing", url: "#" },
-                { text: "Marketplace", url: "#" },
-                { text: "Features", url: "#" },
-                { text: "Integrations", url: "#" },
-                { text: "Pricing", url: "#" },
-            ],
-        },
-        {
-            title: "Company",
-            links: [
-                { text: "About", url: "#" },
-                { text: "Team", url: "#" },
-                { text: "Blog", url: "#" },
-                { text: "Careers", url: "#" },
-                { text: "Contact", url: "#" },
-                { text: "Privacy", url: "#" },
-            ],
-        },
-        {
-            title: "Resources",
-            links: [
-                { text: "Help", url: "#" },
-                { text: "Sales", url: "#" },
-                { text: "Advertise", url: "#" },
-            ],
-        },
-        {
-            title: "Social",
-            links: [
-                { text: "Twitter", url: "#" },
-                { text: "Instagram", url: "#" },
-                { text: "LinkedIn", url: "#" },
-            ],
-        },
-    ],
-    copyright = "© 2025 Nabil Siddik. All rights reserved.",
-    bottomLinks = [
-        { text: "Terms and Conditions", url: "#" },
-        { text: "Privacy Policy", url: "#" },
-    ],
-}: Footer2Props) => {
-    return (
-        <section className="mt-20">
-            <div className="container mx-auto px-5">
-                <footer>
-                    <div className="grid grid-cols-2 gap-8 lg:grid-cols-6">
-                        <div className="col-span-2 mb-8 lg:mb-0 flex gap-5 flex-col sm:flex-row lg:flex-col">
-                            <div className="flex items-center gap-2">
-                                <Link href="/" className="flex items-center gap-2">
-                                    <ProfileIcon />
-                                </Link>
-                                <h3 className="font-bold text-xl">Portfolio</h3>
-                            </div>
-                            <SocialIcons/>
-                        </div>
-                        {menuItems.map((section, sectionIdx) => (
-                            <div key={sectionIdx}>
-                                <h3 className="mb-4 font-bold">{section.title}</h3>
-                                <ul className="text-muted-foreground space-y-4">
-                                    {section.links.map((link, linkIdx) => (
-                                        <li
-                                            key={linkIdx}
-                                            className="hover:text-primary font-medium"
-                                        >
-                                            <a href={link.url}>{link.text}</a>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ))}
-                    </div>
-                    <div className="text-muted-foreground mt-10 flex flex-col justify-between gap-4 border-t py-8 text-sm font-medium md:flex-row md:items-center">
-                        <p>{copyright}</p>
-                        <ul className="flex gap-4">
-                            {bottomLinks.map((link, linkIdx) => (
-                                <li key={linkIdx} className="hover:text-primary underline">
-                                    <a href={link.url}>{link.text}</a>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </footer>
+const Footer = ({}: Footer2Props) => {
+  return (
+    <section className="mt-20">
+      <div className="container mx-auto px-5">
+        <footer>
+          <div className="flex flex-col md:flex-row gap-5 justify-between">
+            <div className="col-span-2 mb-8 lg:mb-0 flex gap-5 flex-col">
+              <div className="flex items-center gap-2">
+                <Link href="/" className="flex items-center gap-2">
+                  <ProfileIcon />
+                </Link>
+                <h3 className="font-bold text-xl">Portfolio</h3>
+              </div>
+              <SocialIcons />
             </div>
-        </section>
-    );
+            <div>
+              <h3 className="font-bold text-2xl mb-3">Pages</h3>
+              <ul className="flex items-center gap-3">
+                <li>
+                  <Link href="/about">About</Link>
+                </li>
+                <li>
+                  <Link href="/projects">Projects</Link>
+                </li>
+                <li>
+                  <Link href="/blogs">Blog</Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="border-t border-gray-200 py-5 flex items-center justify-center mt-4">
+            <p>Copyright &copy; by Nabil Siddik | All right reserved 2025</p>
+          </div>
+        </footer>
+      </div>
+    </section>
+  );
 };
 
 export default Footer;

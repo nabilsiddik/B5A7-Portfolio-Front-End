@@ -89,8 +89,8 @@ export default function CreateBlogForm() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded-2xl shadow-lg">
-      <h2 className="text-2xl font-semibold mb-4">Create a Blog Post</h2>
+    <div className="max-w-3xl mx-auto p-6">
+      <h2 className="text-2xl font-bold mb-4">Create a Blog Post</h2>
 
       <Form {...form}>
         <form
@@ -185,7 +185,7 @@ export default function CreateBlogForm() {
               <FormItem>
                 <FormLabel>Tags (comma separated)</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="react, nextjs, tailwind" />
+                  <Input {...field} placeholder="tag 1, tag 2, tag 3" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -205,7 +205,7 @@ export default function CreateBlogForm() {
 
           <div className="flex items-center justify-end gap-3">
             <Button
-              variant="ghost"
+              variant={"destructive"}
               onClick={() => {
                 form.reset();
                 setImagePreview(null);
