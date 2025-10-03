@@ -20,6 +20,8 @@ const BlogDataTable = async () => {
   const res = await getAllBlog();
   const blogs = res.data;
 
+  console.log("my res", blogs);
+
   return (
     <div>
       <Table>

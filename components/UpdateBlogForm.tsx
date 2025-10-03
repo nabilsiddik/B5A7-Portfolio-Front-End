@@ -82,7 +82,7 @@ export default function UpdateBlogForm({
         toast.error("Blog update failed.");
       }
     } catch (err: unknown) {
-      console.error("something went wrong while creating blog.", err);
+      console.error("something went wrong while updating blog.", err);
     }
   };
 
