@@ -58,7 +58,7 @@ export default function Login() {
       });
 
       if (res.ok) {
-        router.push("/dashboard");
+        router.push("/dashboard/add-blog");
         toast.success("Login successfull.");
       } else {
         console.log("login failed", res?.error);

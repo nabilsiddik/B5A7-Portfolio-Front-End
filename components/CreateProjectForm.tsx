@@ -36,6 +36,8 @@ type ProjectFormValues = z.infer<typeof createProjectSchema>;
 export default function CreateProjectForm() {
   const { data: session } = useSession();
 
+  console.log("amar session", session);
+
   const [submitting, setSubmitting] = useState(false);
 
   const form = useForm<ProjectFormValues>({
