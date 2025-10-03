@@ -93,8 +93,6 @@ const Navbar = ({
 }: Navbar1Props) => {
   const { data: session } = useSession();
 
-  console.log("hulu sess", session);
-
   return (
     <header className="py-4 border-b">
       <div className="container mx-auto px-5">

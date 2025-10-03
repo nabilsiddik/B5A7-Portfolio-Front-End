@@ -1,6 +1,5 @@
 import ProjectCardItem from "@/components/ProjectCardItem";
 import { IProject } from "@/interfaces/project.interfaces";
-import ProjectSection from "@/sections/ProjectSection";
 import { getAllProjects } from "@/utils/getAllProjects";
 import React from "react";
 

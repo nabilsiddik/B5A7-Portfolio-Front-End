@@ -34,7 +34,6 @@ type BlogFormValues = z.infer<typeof blogSchema>;
 
 export default function CreateBlogForm() {
   const { data: session } = useSession();
-  console.log("userid", typeof session?.user?.id);
   const [submitting, setSubmitting] = useState(false);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
@@ -51,7 +50,6 @@ export default function CreateBlogForm() {
 
   // Create blog
   const handleCreateBlog = async (values: BlogFormValues) => {
-    console.log(values);
     setSubmitting(true);
     try {
       const parsed = blogSchema.parse(values);
@@ -79,8 +77,6 @@ export default function CreateBlogForm() {
       } else {
         toast.error("Blog creation failed.");
       }
-
-      console.log(parsedRes, "jey res");
     } catch (err: unknown) {
       console.error("something went wrong while creating blog.", err);
     } finally {

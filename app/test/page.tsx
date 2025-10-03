@@ -1,16 +1,9 @@
-import { auth } from "@/auth"
+import { auth } from "@/auth";
 
-const page = async() => {
+const page = async () => {
+  const session = await auth();
 
-    const session = await auth()
-    console.log('my ses', JSON.stringify(session))
+  return <div></div>;
+};
 
-
-  return (
-    <div>
-      
-    </div>
-  )
-}
-
-export default page
+export default page;

@@ -22,8 +22,6 @@ const ProjectDataTable = async () => {
   const res = await getAllProjects();
   const projects = res.data;
 
-  console.log("ey baba", projects);
-
   return (
     <div>
       <Table>

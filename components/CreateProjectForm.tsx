@@ -36,8 +36,6 @@ type ProjectFormValues = z.infer<typeof createProjectSchema>;
 export default function CreateProjectForm() {
   const { data: session } = useSession();
 
-  console.log("amar session", session);
-
   const [submitting, setSubmitting] = useState(false);
 
   const form = useForm<ProjectFormValues>({
@@ -55,7 +53,6 @@ export default function CreateProjectForm() {
 
   // Create blog
   const handleCreateProject = async (values: ProjectFormValues) => {
-    console.log(values);
     setSubmitting(true);
     try {
       const parsed = createProjectSchema.parse(values);
@@ -84,8 +81,6 @@ export default function CreateProjectForm() {
       } else {
         toast.error("Project creation failed.");
       }
-
-      console.log(parsedRes, "jey res");
     } catch (err: unknown) {
       console.error("something went wrong while creating project.", err);
     } finally {
