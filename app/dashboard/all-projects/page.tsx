@@ -1,4 +1,10 @@
 import ProjectDataTable from "@/components/ProjectDataTable";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dashboard | All Projects",
+  description: "Nabil Siddik Portfolio Dashboard.",
+};
 
 const AllProjects = () => {
   return (

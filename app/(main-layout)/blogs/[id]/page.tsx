@@ -2,9 +2,22 @@ import { Badge } from "@/components/ui/badge";
 import { IBlog } from "@/interfaces/blog.interfaces";
 import { FaEye } from "react-icons/fa";
 
+export async function generateMetadata({ params }: { params: { id: string } }) {
+  const { id } = await params;
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/blog/${Number(id)}`
+  );
+  const blog = await res.json();
+
+  return {
+    title: `Blog - ${blog?.data?.title}`,
+    description: blog?.data?.content,
+  };
+}
+
 export const generateStaticParams = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/blog`);
-
   const { data: blogs } = await res.json();
 
   return blogs?.map((blog: IBlog) => ({

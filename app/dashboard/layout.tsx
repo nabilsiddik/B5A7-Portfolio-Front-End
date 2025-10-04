@@ -1,13 +1,16 @@
-import { AppSidebar } from "@/components/app-sidebar"
+import { AppSidebar } from "@/components/app-sidebar";
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar"
-import { Separator } from "@/components/ui/separator"
-// import AuthProvider from "@/providers/AuthProvider";
+} from "@/components/ui/sidebar";
+import { Separator } from "@/components/ui/separator";
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -21,9 +24,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
             />
           </div>
         </header>
-        <div className="px-5">
-          {children}
-        </div>
+        <div className="px-5">{children}</div>
       </SidebarInset>
     </SidebarProvider>
   );

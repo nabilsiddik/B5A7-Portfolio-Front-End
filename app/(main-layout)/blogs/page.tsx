@@ -1,6 +1,11 @@
 import BlogCardItem from "@/components/BlogCardItem";
 import { IBlog } from "@/interfaces/blog.interfaces";
-import { getAllBlog } from "@/utils/getAllBlog";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Blogs | Nabil Siddik Portfolio",
+  description: "Nabil Siddik Portfolio Blogs.",
+};
 
 const BlogPage = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/blog`, {

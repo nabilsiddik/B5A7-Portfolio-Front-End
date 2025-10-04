@@ -3,7 +3,7 @@ import Navbar from "@/layouts/Navbar";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Home - Portfolio",
+  title: "Home - Nabil Siddik Portfolio",
   description: "Portfolio website",
 };
 
@@ -14,11 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <div className="flex flex-col min-h-screen">
-        <Navbar/>
-        <div className="flex-1">
-          {children}
-        </div>
-        <Footer/>
+      <Navbar />
+      <div className="flex-1">{children}</div>
+      <Footer />
     </div>
   );
 }

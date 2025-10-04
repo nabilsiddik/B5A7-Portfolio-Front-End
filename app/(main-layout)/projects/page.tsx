@@ -1,7 +1,11 @@
 import ProjectCardItem from "@/components/ProjectCardItem";
 import { IProject } from "@/interfaces/project.interfaces";
-import { getAllProjects } from "@/utils/getAllProjects";
-import React from "react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Projects | Nabil Siddik Portfolio",
+  description: "Nabil Siddik Portfolio projects.",
+};
 
 const ProjectPage = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/project`, {
