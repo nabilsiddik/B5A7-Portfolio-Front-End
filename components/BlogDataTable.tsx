@@ -17,7 +17,9 @@ import { RiDeleteBin6Fill } from "react-icons/ri";
 import UpdateBlogModal from "./UpdateBlogModal";
 
 const BlogDataTable = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/blog`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/blog`, {
+    next: { revalidate: 30 },
+  });
   const blogs = await res.json();
 
   return (

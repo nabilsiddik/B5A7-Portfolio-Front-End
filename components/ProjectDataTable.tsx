@@ -9,17 +9,15 @@ import {
 import { shortText } from "@/utils/shortText";
 import Image from "next/image";
 import Link from "next/link";
-import { FaEdit, FaEye } from "react-icons/fa";
-import BlogDeletionConfirmModal from "./BlogDeletionConfirmModal";
 import { RiDeleteBin6Fill } from "react-icons/ri";
-import UpdateBlogModal from "./UpdateBlogModal";
-import { getAllProjects } from "@/utils/getAllProjects";
 import { IProject } from "@/interfaces/project.interfaces";
 import { Button } from "./ui/button";
 import ProjectDeletionConfirmModal from "./ProjdctDeletionConfirmModal";
 
 const ProjectDataTable = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/project`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/project`, {
+    next: { revalidate: 30 },
+  });
   const projects = await res.json();
 
   return (
