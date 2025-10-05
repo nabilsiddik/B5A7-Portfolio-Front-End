@@ -20,6 +20,7 @@ import {
 import { toast } from "sonner";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
+import RichTextEditor from "./RichTextEditor";
 
 // Blog zod schema
 const blogSchema = z.object({
@@ -62,6 +63,8 @@ export default function CreateBlogForm() {
         tags: parsed.tags.split(",") || [],
         authorId: Number(session?.user?.id),
       };
+
+      console.log("my payload", payload);
 
       const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/blog`, {
         method: "POST",
@@ -106,7 +109,7 @@ export default function CreateBlogForm() {
               </FormItem>
             )}
           />
-
+          {/* 
           <FormField
             control={form.control}
             name="content"
@@ -118,6 +121,23 @@ export default function CreateBlogForm() {
                     {...field}
                     placeholder="blog-content"
                     className="min-h-[180px]"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          /> */}
+
+          <FormField
+            control={form.control}
+            name="content"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Content</FormLabel>
+                <FormControl>
+                  <RichTextEditor
+                    value={field.value}
+                    onChange={field.onChange}
                   />
                 </FormControl>
                 <FormMessage />

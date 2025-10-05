@@ -1,3 +1,4 @@
+import RichTextEditor from "@/components/rich-text-editor";
 import AboutSection from "@/sections/AboutSection";
 import BlogSection from "@/sections/BlogSection";
 import ProjectSection from "@/sections/ProjectSection";

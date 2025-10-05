@@ -12,6 +12,7 @@ import { Button } from "./ui/button";
 import { shortText } from "@/utils/shortText";
 import { FaEye } from "react-icons/fa";
 import Link from "next/link";
+import { htmlToText } from "./../utils/htmlToText";
 
 const BlogCardItem = ({ blog }: { blog: IBlog }) => {
   return (
@@ -35,7 +36,7 @@ const BlogCardItem = ({ blog }: { blog: IBlog }) => {
             {shortText(blog?.title, 90)}
           </CardTitle>
         </Link>
-        <CardDescription>{shortText(blog?.content, 200)}</CardDescription>
+        <CardDescription>{htmlToText(blog?.content, 200)}</CardDescription>
       </CardContent>
       <CardFooter>
         <div className="flex items-center justify-between w-full">

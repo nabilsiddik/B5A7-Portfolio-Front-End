@@ -106,9 +106,9 @@ const Navbar = () => {
               <NavigationMenu>
                 <NavigationMenuList>
                   <ul className="flex flex-row gap-3">
-                    {menu.map((item) => {
+                    {menu.map((item, index) => {
                       return (
-                        <li>
+                        <li key={index}>
                           <Link href={item?.url}>{item?.title}</Link>
                         </li>
                       );
@@ -162,10 +162,8 @@ const Navbar = () => {
                     <ul className="flex flex-col gap-3">
                       {menu.map((item, index) => {
                         return (
-                          <li>
-                            <Link key={index} href={item?.url}>
-                              {item?.title}
-                            </Link>
+                          <li key={index}>
+                            <Link href={item?.url}>{item?.title}</Link>
                           </li>
                         );
                       })}

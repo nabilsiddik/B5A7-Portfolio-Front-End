@@ -80,7 +80,7 @@ const BlogDetails = async ({ params }: { params: { id: string } }) => {
               <FaEye /> {blog?.data?.view}
             </h3>
           </div>
-          <p>{blog?.data?.content}</p>
+          <div dangerouslySetInnerHTML={{ __html: blog?.data?.content }}></div>
         </div>
         <div className="shadow-md bg-gray-100 flex-1 p-5 md:p-3 lg:p-5">
           <div>
