@@ -14,6 +14,7 @@ Built with Next.js, deployed on Vercel, with backend APIs connected via Express 
 - Blog Management
 - Project Management
 - Dashboard
+- Rich Text Editor
 - Next.js Performance optimization
 - Responsive UI/UX
 
